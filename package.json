@@ -1,0 +1,60 @@
+{
+  "name": "gulp-css-modules-boilerplate",
+  "version": "1.0.0",
+  "description": "Css modules with gulp and webpack streams",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/maotora/gulp-css-modules"
+  },
+  "keywords": [
+    "gulp",
+    "css-modules",
+    "webpack-streams"
+  ],
+  "author": "Maotora Makweba",
+  "license": "MIT",
+  "devDependencies": {
+    "ag-gulp-4": "^4.0.0",
+    "autoprefixer": "^6.5.1",
+    "axis": "^0.6.1",
+    "babel": "^6.5.2",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "css-loader": "^0.25.0",
+    "del": "^2.2.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-load-plugins": "^1.3.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.1.0",
+    "gulp-stylus": "^2.5.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.10",
+    "nib": "^1.1.2",
+    "rupture": "^0.6.2",
+    "style-loader": "^0.13.1",
+    "typographic": "^2.9.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "radium-grid": "^2.0.1",
+    "react": "^15.3.2",
+    "react-css-modules": "^3.7.10",
+    "react-dom": "^15.3.2",
+    "react-router": "^2.8.1"
+  }
+}
