@@ -31,3 +31,5 @@ If there is another gulp react-css-modules boilerplate *Lemmino* about it so
 i can steal some cool concepts.
 
 *Peace out!*
+
+Ohw, and there are no tests!
