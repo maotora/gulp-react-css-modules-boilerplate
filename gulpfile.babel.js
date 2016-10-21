@@ -129,4 +129,4 @@ gulp.task('pug', gulp.series(cleanHtml, pug));
 
 gulp.task('connect', connect);
 
-gulp.task('default', gulp.parallel('pug', 'styles', 'jsx', 'connect', 'watch'));
+gulp.task('default', gulp.series('pug', 'styles', 'jsx', 'connect', 'watch'));
