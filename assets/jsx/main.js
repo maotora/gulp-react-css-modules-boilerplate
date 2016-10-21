@@ -1,4 +1,4 @@
-import styles from './styles/jsx/styles.css';
+import styles from './styles.css';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CSSModules from 'react-css-modules';
