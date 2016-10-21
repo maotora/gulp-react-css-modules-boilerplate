@@ -25,12 +25,13 @@ import nib from 'nib';
 
 const files = {
     dest: {
-        css: 'public/css/',
+        css: (file) => { return path.normalize(path.dirname(file.path) + '/..'); },
+        cssFiles: 'assets/**/*.css',
         pug: 'public/',
         jsx: 'public/jsx'
     },
     source: {
-        css: 'assets/styles/*.styl',
+        css: 'assets/**/*.styl',
         pug: 'assets/views/*.pug',
         jsx: 'assets/jsx/main.js',
         jsxFiles: 'assets/jsx/**/*.js'
@@ -110,7 +111,7 @@ const clean = (file) => {
 
 const cleanJsx =  () => { return clean(files.dest.jsx);};
 
-const cleanStyles =  () => { return clean(files.dest.css);};
+const cleanStyles =  () => { return clean(files.dest.cssFiles);};
 
 const cleanHtml = () => { return clean(files.dest.pug); };
 
