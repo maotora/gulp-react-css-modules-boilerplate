@@ -1,10 +1,11 @@
 {
-  "name": "gulp-css-modules-boilerplate",
+  "name": "Umondi",
   "version": "1.0.0",
-  "description": "Css modules with gulp and webpack streams",
+  "description": "Kombo Blog Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
