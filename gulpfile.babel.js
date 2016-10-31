@@ -25,13 +25,10 @@ import nib from 'nib';
 
 const files = {
     dest: {
-        css: (file) => { return path.normalize(path.dirname(file.path) + '/..'); },
-        cssFiles: 'assets/**/*.css',
         pug: 'public/',
         jsx: 'public/jsx'
     },
     source: {
-        css: 'assets/**/*.styl',
         pug: 'assets/views/*.pug',
         jsx: 'assets/jsx/main.js',
         jsxFiles: 'assets/jsx/**/*.js'
@@ -45,16 +42,6 @@ export function pug() {
         }))
         .pipe($.connect.reload())
         .pipe(gulp.dest(files.dest.pug));
-}
-
-export function styles() {
-    return gulp.src(files.source.css)
-        .pipe($.stylus({
-            use: [rupture(), axis(), typographic(), nib()]
-        }))
-        .pipe($.plumber())
-        .pipe($.connect.reload())
-        .pipe(gulp.dest(files.dest.css));
 }
 
 export function react(done) {
@@ -73,8 +60,8 @@ export function react(done) {
             module: {
                 loaders: [
                     {
-                        test: /\.css$/,
-                        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+                        test: /\.(styl|css)$/,
+                        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus')
                     },
                     {
                         test: /\.js$/,
@@ -83,6 +70,9 @@ export function react(done) {
                         ]
                     }
                 ]
+            },
+            stylus: {
+                use: [nib(), axis(), typographic()]
             }
         }))
         .pipe($.connect.reload())
@@ -100,7 +90,6 @@ export function connect() {
 
 export function watch() {
     $.util.log('watching...');
-    gulp.watch(files.source.css, styles);
     gulp.watch(files.source.pug, pug);
     gulp.watch(files.source.jsxFiles, react);
 }
@@ -109,24 +98,20 @@ const clean = (file) => {
     return del([file], {force: true});
 };
 
-const cleanJsx =  () => { return clean(files.dest.jsx);};
+const cleanFiles = () => { return clean(files.dest.pug); };
 
-const cleanStyles =  () => { return clean(files.dest.cssFiles);};
+const cleanJsx = () => { return clean(files.dest.jsx); };
 
-const cleanHtml = () => { return clean(files.dest.pug); };
+const afterClean = (done) =>  { gulp.series(react, pug); done(); };
 
-export { cleanStyles, cleanHtml, cleanJsx };
+export { cleanFiles, cleanJsx, afterClean };
 
 gulp.task('jsx', gulp.series(cleanJsx, react));
 
-gulp.task('clean', gulp.parallel(cleanJsx, cleanStyles, cleanHtml));
+gulp.task('connect', gulp.series(connect));
 
-gulp.task('styles', gulp.series(cleanStyles, styles));
+gulp.task('watch', gulp.series(watch));
 
-gulp.task('watch', watch);
+gulp.task('pug', gulp.series(cleanFiles, afterClean));
 
-gulp.task('pug', gulp.series(cleanHtml, pug));
-
-gulp.task('connect', connect);
-
-gulp.task('default', gulp.parallel('pug', 'styles', 'jsx', 'connect', 'watch'));
+gulp.task('default', gulp.series('pug', 'jsx', 'connect', 'watch'));
