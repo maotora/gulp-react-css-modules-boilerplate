@@ -46,16 +46,18 @@
     "nib": "^1.1.2",
     "rupture": "^0.6.2",
     "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.3.1",
     "typographic": "^2.9.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
-    "radium-grid": "^2.0.1",
     "react": "^15.3.2",
     "react-css-modules": "^3.7.10",
     "react-dom": "^15.3.2",
+    "react-grid-layout": "^0.13.9",
     "react-router": "^2.8.1"
   }
 }
