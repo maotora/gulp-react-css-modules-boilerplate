@@ -1,7 +1,8 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins({
-    scope: ["devDependencies"]
+    scope: ["devDependencies"],
+    camelize: true
 });
 
 /* Npm modules */
@@ -26,12 +27,14 @@ import nib from 'nib';
 const files = {
     dest: {
         pug: 'public/',
-        jsx: 'public/jsx'
+        jsx: 'public/jsx',
+        legacy: 'public/jsx/'
     },
     source: {
         pug: 'assets/views/*.pug',
         jsx: 'assets/jsx/main.js',
-        jsxFiles: 'assets/jsx/**/*.js'
+        jsxFiles: 'assets/jsx/**/*.js',
+        legacy: ['node_modules/react-grid-layout/css/styles.css', 'node_modules/react-resizable/css/styles.css']
     }
 };
 
@@ -42,6 +45,13 @@ export function pug() {
         }))
         .pipe($.connect.reload())
         .pipe(gulp.dest(files.dest.pug));
+}
+
+export function legacyCss() {
+    return gulp.src(files.source.legacy)
+        .pipe($.concat('legacy.css'))
+        .pipe($.cleanCss({compatibility: 'ie8'}))
+        .pipe(gulp.dest(files.dest.legacy));
 }
 
 export function react(done) {
@@ -102,16 +112,14 @@ const cleanFiles = () => { return clean(files.dest.pug); };
 
 const cleanJsx = () => { return clean(files.dest.jsx); };
 
-const afterClean = (done) =>  { gulp.series(react, pug); done(); };
+export { cleanFiles, cleanJsx };
 
-export { cleanFiles, cleanJsx, afterClean };
-
-gulp.task('jsx', gulp.series(cleanJsx, react));
+gulp.task('jsx', gulp.series(cleanJsx, legacyCss, react));
 
 gulp.task('connect', gulp.series(connect));
 
 gulp.task('watch', gulp.series(watch));
 
-gulp.task('pug', gulp.series(cleanFiles, afterClean));
+gulp.task('pug', gulp.series(cleanFiles, pug, react));
 
-gulp.task('default', gulp.series('pug', 'jsx', 'connect', 'watch'));
+gulp.task('default', gulp.series('pug', 'jsx', 'connect', 'watch')); //- Something stupid is going on here, will catch it later!
