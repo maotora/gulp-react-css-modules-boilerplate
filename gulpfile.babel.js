@@ -27,14 +27,12 @@ import nib from 'nib';
 const files = {
     dest: {
         pug: 'public/',
-        jsx: 'public/jsx',
-        legacy: 'public/jsx/'
+        jsx: 'public/jsx'
     },
     source: {
         pug: 'assets/views/*.pug',
         jsx: 'assets/jsx/main.js',
-        jsxFiles: 'assets/jsx/**/*.js',
-        legacy: ['node_modules/react-grid-layout/css/styles.css', 'node_modules/react-resizable/css/styles.css']
+        jsxFiles: 'assets/jsx/**/*.js'
     }
 };
 
@@ -45,13 +43,6 @@ export function pug() {
         }))
         .pipe($.connect.reload())
         .pipe(gulp.dest(files.dest.pug));
-}
-
-export function legacyCss() {
-    return gulp.src(files.source.legacy)
-        .pipe($.concat('legacy.css'))
-        .pipe($.cleanCss({compatibility: 'ie8'}))
-        .pipe(gulp.dest(files.dest.legacy));
 }
 
 export function react(done) {
@@ -114,7 +105,7 @@ const cleanJsx = () => { return clean(files.dest.jsx); };
 
 export { cleanFiles, cleanJsx };
 
-gulp.task('jsx', gulp.series(cleanJsx, legacyCss, react));
+gulp.task('jsx', gulp.series(cleanJsx, react));
 
 gulp.task('connect', gulp.series(connect));
 
