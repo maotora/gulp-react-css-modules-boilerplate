@@ -8,24 +8,38 @@ export default class Nav extends Component {
     render() {
         return (
             
-            <Div divStyle="navItem" key="a" href="/">
-                Home
-            </Div>
-            <Div divStyle="navItem" key="b" href="blog">
-                Blog
-            </Div>
-            <Div divStyle="navItem" key="c" href="about">
-                About
-            </Div>
-            <Div divStyle="navItem" key="d" href="media">
-                Media
-            </Div>
-            <Div divStyle="navItem" key="e" href="contact">
-                Contacts
-            </Div>
+            <Container>
+                <Div divStyle="navItem" key="a" href="/">
+                    Home
+                </Div>
+                <Div divStyle="navItem" key="b" href="blog">
+                    Blog
+                </Div>
+                <Div divStyle="navItem" key="c" href="about">
+                    About
+                </Div>
+                <Div divStyle="navItem" key="d" href="media">
+                    Media
+                </Div>
+                <Div divStyle="navItem" key="e" href="contact">
+                    Contacts
+                </Div>
+            </Container>
 
         )
     };
+}
+
+class Container extends Component {
+    
+    render() {
+        return (
+            
+            <div>
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 @CSSModules(styles)
