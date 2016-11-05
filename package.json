@@ -61,6 +61,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "radium": "^0.18.1",
     "radium-grid": "^2.0.3",
     "react": "^15.3.2",
     "react-css-modules": "^3.7.10",

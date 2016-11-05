@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles.styl';
 import CSSModules from 'react-css-modules';
+import { Grid, Cell } from 'radium-grid';
 
 /* jshint ignore:start */
 
