@@ -66,6 +66,7 @@ export function react(done) {
                     },
                     {
                         test: /\.js$/,
+                        exclude: /node_modules/,
                         loaders: [
                             "babel"
                         ]
