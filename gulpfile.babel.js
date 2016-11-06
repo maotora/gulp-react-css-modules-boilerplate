@@ -76,6 +76,7 @@ export function react(done) {
                 use: [nib(), axis(), typographic()]
             }
         }))
+        .pipe($.plumber())
         .pipe($.connect.reload())
         .pipe(gulp.dest(files.dest.jsx));
 
